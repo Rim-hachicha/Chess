@@ -44,6 +44,8 @@ MyRookTests >> testMovesWithOponentObstacle [
 		includesAll:
 			(#( e5 e6 e7 e8 d4 c4 b4 a4 f4 g4 e3 e2 e1 ) collect: [ :name |
 				 board at: name ])
+			
+	"test"
 ]
 
 { #category : 'tests' }
