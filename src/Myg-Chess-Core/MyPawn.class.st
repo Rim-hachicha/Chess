@@ -20,9 +20,22 @@ MyPawn >> renderPieceOn: aSquare [
 { #category : 'rendering' }
 MyPawn >> targetSquaresLegal: aBoolean [
 
-	^ (self isWhite
-		   ifTrue: [ { square up } ]
-		   ifFalse: [ { square down } ]) select: [ :s |
+	| forward |
+    forward := self isWhite
+        ifTrue: [ square up ]
+        ifFalse: [ square down ].
+
+    ^ {
+        forward.
+        ((self isWhite and: [ square file = $2 ])
+            or: [ self isWhite not and: [ square file = $7 ] ])
+            ifTrue: [
+                self isWhite
+                    ifTrue: [ forward up ]
+                    ifFalse: [ forward down ] ]
+            ifFalse: [ nil ] }
+			
+		select: [ :s |
 		  s notNil and: [
-			  s hasPiece not or: [ s contents color ~= color ] ] ]
+			  s hasPiece not ] ]
 ]
