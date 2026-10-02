@@ -5,6 +5,31 @@ Class {
 	#package : 'Myg-Chess-Core'
 }
 
+{ #category : 'as yet unclassified' }
+MyPawn >> captureSquares [
+	| forward |
+    forward := self direction.
+
+    ^ {
+        forward left.
+        forward right
+    }
+]
+
+{ #category : 'accessing' }
+MyPawn >> direction [
+   ^ self isWhite
+        ifTrue: [ square up ]
+        ifFalse: [ square down ]
+]
+
+{ #category : 'as yet unclassified' }
+MyPawn >> doubleDirection [
+    ^ self isWhite
+        ifTrue: [ self direction up ]
+        ifFalse: [ self direction down ]
+]
+
 { #category : 'accessing' }
 MyPawn >> id [
 
@@ -20,22 +45,24 @@ MyPawn >> renderPieceOn: aSquare [
 { #category : 'rendering' }
 MyPawn >> targetSquaresLegal: aBoolean [
 
-	| forward |
-    forward := self isWhite
-        ifTrue: [ square up ]
-        ifFalse: [ square down ].
+	| forward targets |
+    
+    forward := self direction.
+    targets := OrderedCollection new.
 
-    ^ {
-        forward.
-        ((self isWhite and: [ square file = $2 ])
-            or: [ self isWhite not and: [ square file = $7 ] ])
-            ifTrue: [
-                self isWhite
-                    ifTrue: [ forward up ]
-                    ifFalse: [ forward down ] ]
-            ifFalse: [ nil ] }
-			
-		select: [ :s |
-		  s notNil and: [
-			  s hasPiece not ] ]
+    forward hasPiece ifFalse: [
+        targets add: forward ].
+
+    ((self isWhite and: [ square file = $2 ])
+        or: [ self isWhite not and: [ square file = $7 ] ])
+        ifTrue: [
+            self doubleDirection hasPiece ifFalse: [
+                targets add: self doubleDirection ] ].
+
+    self captureSquares
+        do: [ :s |
+            (s notNil and: [ s hasPiece ])
+                ifTrue: [ targets add: s ] ].
+
+    ^ targets
 ]
