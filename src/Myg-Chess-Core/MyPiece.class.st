@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'color',
-		'square'
+		'square',
+		'lastMove'
 	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
@@ -143,6 +144,16 @@ MyPiece >> isWhite [
 	^ color isBlack not
 ]
 
+{ #category : 'accessing' }
+MyPiece >> lastMove [ 
+ ^ lastMove 
+]
+
+{ #category : 'accessing' }
+MyPiece >> lastMove: aMove [
+	lastMove := aMove
+]
+
 { #category : 'rendering' }
 MyPiece >> leftFile [
 
@@ -164,11 +175,17 @@ MyPiece >> legalTargetSquares [
 { #category : 'path commands' }
 MyPiece >> moveTo: aSquare [
 
+	| oldSquare |
+
 	(self legalTargetSquares includes: aSquare) ifFalse: [ ^ self ].
+	
+	oldSquare := square.
 
 	square emptyContents.
 	square := aSquare.
-	aSquare contents: self
+	aSquare contents: self.
+	
+	lastMove := { oldSquare. aSquare}.
 ]
 
 { #category : 'rendering' }

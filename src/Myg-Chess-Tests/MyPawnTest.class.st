@@ -42,6 +42,25 @@ MyPawnTest >> testPawnCanMoveDiagonally [
 ]
 
 { #category : 'tests' }
+MyPawnTest >> testPawnCanMoveEnPassant [
+    | board pawnW pawnB squares |
+
+    board := MyChessBoard empty.
+
+    pawnW := MyPawn white.
+    pawnB := MyPawn black.
+
+    board at: 'e5' put: pawnW.
+    board at: 'd7' put: pawnB.
+
+    pawnB moveTo: (board at: 'd5').
+
+    squares := pawnW targetSquaresLegal: true.
+
+    self assert: (squares includes: (board at: 'd6')).
+]
+
+{ #category : 'tests' }
 MyPawnTest >> testPawnCanMoveTwoSquares [
 	| pawn squares board |
 	board := MyChessBoard empty.
@@ -70,6 +89,25 @@ MyPawnTest >> testPawnCannotMoveDiagonallyWithoutCapture [
 
     self deny: (squares includes: (board at: 'd6')).
     self deny: (squares includes: (board at: 'f6')).
+]
+
+{ #category : 'tests' }
+MyPawnTest >> testPawnCannotMoveEnPassantAfterOneSquareMove [
+    | board pawnW pawnB squares |
+
+    board := MyChessBoard empty.
+
+    pawnW := MyPawn white.
+    pawnB := MyPawn black.
+
+    board at: 'e5' put: pawnW.
+    board at: 'd6' put: pawnB.
+
+    pawnB moveTo: (board at: 'd5').
+
+    squares := pawnW targetSquaresLegal: true.
+
+    self deny: (squares includes: (board at: 'd6')).
 ]
 
 { #category : 'tests' }
