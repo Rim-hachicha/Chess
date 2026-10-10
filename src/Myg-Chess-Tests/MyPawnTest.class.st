@@ -111,6 +111,21 @@ MyPawnTest >> testPawnCannotMoveEnPassantAfterOneSquareMove [
 ]
 
 { #category : 'tests' }
+MyPawnTest >> testPawnCannotMoveEnPassantWithoutAdjacentPawn [
+	| board pawnW squares |
+
+	board := MyChessBoard empty.
+
+	pawnW := MyPawn white.
+
+	board at: 'e5' put: pawnW.
+
+	squares := pawnW targetSquaresLegal: true.
+
+	self deny: (squares includes: (board at: 'd6')).
+]
+
+{ #category : 'tests' }
 MyPawnTest >> testPawnCannotMoveForwardIfBlocked [
 
     | board wPawn bPawn squares |
