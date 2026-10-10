@@ -127,6 +127,11 @@ MyPiece >> id [
 ]
 
 { #category : 'testing' }
+MyPiece >> isEmpty [
+	^ false 
+]
+
+{ #category : 'testing' }
 MyPiece >> isKing [
 	
 	^ false
