@@ -15,7 +15,7 @@ MyPawn >> adjacentPawns [
 { #category : 'as yet unclassified' }
 MyPawn >> adjacentSquares [
 	^ { square left. square right }
-	select: [ :each | each notNil ]
+	reject: [ :each | each isOffBoard ]
 ]
 
 { #category : 'testing' }
