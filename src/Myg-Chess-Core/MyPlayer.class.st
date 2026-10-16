@@ -12,7 +12,7 @@ Class {
 { #category : 'constants' }
 MyPlayer >> black [
 
-	self color: Color black
+	self color: MyPieceColor black 
 ]
 
 { #category : 'accessing' }
@@ -42,7 +42,7 @@ MyPlayer >> game: anObject [
 { #category : 'testing' }
 MyPlayer >> isWhite [
 	
-	^ color = Color white
+	^ color isWhite 
 ]
 
 { #category : 'accessing' }
@@ -81,5 +81,5 @@ MyPlayer >> play [
 { #category : 'constants' }
 MyPlayer >> white [
 
-	self color: Color white
+	self color: MyPieceColor white 
 ]

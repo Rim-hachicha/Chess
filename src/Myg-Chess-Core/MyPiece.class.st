@@ -146,7 +146,7 @@ MyPiece >> isPiece [
 { #category : 'testing' }
 MyPiece >> isWhite [
 	
-	^ color isBlack not
+	^ color isWhite 
 ]
 
 { #category : 'accessing' }
