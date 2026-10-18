@@ -11,6 +11,16 @@ Class {
 }
 
 { #category : 'api - text weight' }
+MyPieceColor class >> black [ 
+	^ MyBlackColor new
+]
+
+{ #category : 'constants' }
+MyPieceColor class >> white [
+    ^ MyWhiteColor new
+]
+
+{ #category : 'api - text weight' }
 MyPieceColor >> = aPieceColor [ 
 	^ self class = aPieceColor class
 ]

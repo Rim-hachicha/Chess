@@ -65,13 +65,13 @@ MyKing >> isKing [
 { #category : 'accessing' }
 MyKing >> opponentPieces [
 
-	^ self board pieces select: [ :e | e color = color negated ] 
+	^ self board pieces select: [ :e | e isEmpty not and: [ e color = color opponentColor ] ]
 ]
 
 { #category : 'rendering' }
 MyKing >> renderPieceOn: aSquare [
 
-	^ aSquare renderKing: self
+	^ color renderKing: aSquare 
 ]
 
 { #category : 'rendering' }

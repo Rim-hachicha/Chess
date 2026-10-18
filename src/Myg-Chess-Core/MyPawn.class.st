@@ -102,7 +102,7 @@ MyPawn >> opponentPawns [
 { #category : 'rendering' }
 MyPawn >> renderPieceOn: aSquare [ 
 	
-	^ aSquare renderPawn: self
+	^ color renderPawn: aSquare 
 ]
 
 { #category : 'as yet unclassified' }
